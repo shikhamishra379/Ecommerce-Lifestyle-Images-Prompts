@@ -1,0 +1,7 @@
+{
+  "name": "PromptEngine Pro",
+  "description": "A high-end AI prompt generator for e-commerce, creating professional photography blueprints using Gemini 3 Pro.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
