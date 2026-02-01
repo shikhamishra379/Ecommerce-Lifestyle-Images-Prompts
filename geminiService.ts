@@ -1,4 +1,3 @@
-
 import { GoogleGenAI, Type } from "@google/genai";
 import { ProductInput, GenerationResult, ScenarioType } from "./types";
 
@@ -27,9 +26,15 @@ CATEGORY-SPECIFIC LOGIC:
 Every prompt MUST use '@img1' to refer to the product to ensure the AI knows to preserve the uploaded reference.`;
 
 export const generateProfessionalPrompts = async (input: ProductInput): Promise<GenerationResult> => {
-  const apiKey = process.env.API_KEY;
+  let apiKey: string | undefined;
+  try {
+    apiKey = process.env.API_KEY;
+  } catch (e) {
+    apiKey = undefined;
+  }
+  
   if (!apiKey) {
-    throw new Error("API Key missing");
+    throw new Error("API Key missing.");
   }
 
   const ai = new GoogleGenAI({ apiKey });
@@ -86,7 +91,8 @@ export const generateProfessionalPrompts = async (input: ProductInput): Promise<
   });
 
   try {
-    const data = JSON.parse(response.text || "{}");
+    const text = response.text || "{}";
+    const data = JSON.parse(text);
     return data as GenerationResult;
   } catch (error) {
     console.error("Failed to parse Gemini response", error);

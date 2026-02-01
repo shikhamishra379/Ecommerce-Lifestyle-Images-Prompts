@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { PromptBlueprint } from '../types';
 
@@ -6,7 +5,6 @@ interface PromptCardProps {
   blueprint: PromptBlueprint;
 }
 
-// Fixed: Moved Section component outside and used React.FC to properly handle 'key' and other props
 const Section: React.FC<{ title: string; content: string }> = ({ title, content }) => (
   <div className="mb-4">
     <span className="text-[10px] uppercase tracking-widest font-bold text-indigo-400/80 block mb-1">
@@ -19,12 +17,11 @@ const Section: React.FC<{ title: string; content: string }> = ({ title, content 
 export const PromptCard: React.FC<PromptCardProps> = ({ blueprint }) => {
   const [copied, setCopied] = useState(false);
 
-  // Map fields to the descriptive labels from the user's example style
   const sections = [
     { title: "Scene & Environment", content: blueprint.scene },
     { title: "Placement & Interaction", content: blueprint.placement },
     { title: "Supporting Props", content: blueprint.supportingProps },
-    { title: "Product Rules (@img1)", content: blueprint.dynamicElements }, // We used dynamicElements to store Rules in the schema mapping
+    { title: "Product Rules (@img1)", content: blueprint.dynamicElements },
     { title: "Lighting Geometry", content: blueprint.lighting },
     { title: "Camera & Composition", content: blueprint.camera },
     { title: "Style & Color Grading", content: blueprint.color },

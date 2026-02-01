@@ -1,6 +1,5 @@
-
-import React, { useState, useCallback, useRef } from 'react';
-import { ProductInput, GenerationResult, ScenarioType } from './types';
+import React, { useState, useRef } from 'react';
+import { GenerationResult } from './types';
 import { CATEGORIES, getFallbackBlueprints } from './constants';
 import { generateProfessionalPrompts } from './geminiService';
 import { PromptCard } from './components/PromptCard';
@@ -57,7 +56,6 @@ const App: React.FC = () => {
       setResults(response);
     } catch (err: any) {
       console.error("Generation error:", err);
-      // Deterministic Fallback Logic
       const fallbacks = getFallbackBlueprints(productName, category);
       setResults({
         blueprints: fallbacks,
@@ -70,7 +68,6 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
-      {/* Header Section */}
       <header className="text-center mb-16 max-w-2xl w-full">
         <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight gradient-text">
           PromptEngine Pro
@@ -80,7 +77,6 @@ const App: React.FC = () => {
         </p>
       </header>
 
-      {/* Control Panel */}
       <div className="w-full max-w-4xl glass rounded-3xl p-8 mb-12 shadow-2xl">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           <div className="space-y-6">
@@ -139,7 +135,7 @@ const App: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4">
+        <div className="mt-10 flex flex-col md:flex-row items-center justify-center gap-4 relative">
           {error && <p className="text-red-400 text-sm w-full text-center md:absolute md:-top-8">{error}</p>}
           
           <button 
@@ -161,10 +157,9 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Results Section */}
       <div className="w-full max-w-7xl">
         {results?.analysis && (
-          <div className="mb-8 glass p-6 rounded-2xl flex items-start gap-4 animate-in fade-in duration-700">
+          <div className="mb-8 glass p-6 rounded-2xl flex items-start gap-4">
             <div className="p-2 bg-indigo-500/20 rounded-lg">
               <svg className="w-6 h-6 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
             </div>

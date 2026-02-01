@@ -1,4 +1,3 @@
-
 import { ScenarioType, PromptBlueprint } from './types';
 
 export const CATEGORIES = [
@@ -32,7 +31,6 @@ export const CATEGORIES = [
 ];
 
 export const getFallbackBlueprints = (productName: string, category: string): PromptBlueprint[] => {
-  // Determine traits of the category for better prompts
   const isFashion = category.includes("Fashion") || category.includes("Clothing") || category.includes("Jewelry");
   const isTech = category.includes("Electronics") || category.includes("Computers") || category.includes("Phones");
   const isHome = category.includes("Home") || category.includes("Appliances") || category.includes("Garden");
@@ -46,7 +44,6 @@ export const getFallbackBlueprints = (productName: string, category: string): Pr
     let scene = `A professional commercial environment optimized for ${category}`;
     let techSpecs = "8K, highly detailed, raw photo format";
 
-    // Category specific overrides
     if (isLuxury) {
       camera = "Phase One XF, 100mm Trichromatic lens";
       lighting = "Cinematic rim lighting with subtle lens flares and high contrast";
@@ -66,7 +63,6 @@ export const getFallbackBlueprints = (productName: string, category: string): Pr
       lighting = "Ring flash for even light distribution across fine textures";
     }
 
-    // Scenario specific logic
     const isHumanFocused = type === ScenarioType.HUMAN_CONNECTION || type === ScenarioType.LIFESTYLE_HERO;
     const skinDirective = isHumanFocused ? "Featuring models with authentic skin textures, natural pores, diverse complexions, and candid human expressions." : "";
     const petDirective = isPet ? "Capturing authentic animal expressions, detailed fur textures, and natural animal-human interactions." : "";
